@@ -43,7 +43,7 @@ FormInput.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  type: PropTypes.oneOf('text', 'number', 'password'),
+  type: PropTypes.oneOf(['text', 'number', 'password']),
   className: PropTypes.string,
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired
