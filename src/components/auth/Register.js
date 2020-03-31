@@ -6,6 +6,8 @@ import { RadioInput } from '../shared/radioInput';
 import { Button } from '../shared/button';
 import { Link } from 'react-router-dom';
 
+import { validateInputs } from '../../helpers/Helpers';
+
 function Register() {
   const [user, setUser] = useState({
     data: {
@@ -22,11 +24,16 @@ function Register() {
   });
 
   const { username, password } = user.data;
-  const { usernameError, passwordError } = error;
+  const { usernameError, passwordError, roleError } = error;
 
   const onRegisterUser = e => {
     e.preventDefault();
-    console.log(user);
+
+    const isValid = validateInputs(user.data, setError);
+
+    if(isValid) {
+      console.log(user);
+    }
   };
 
   const onChange = e => {
@@ -53,7 +60,7 @@ function Register() {
               className="form-control"
               placeholder="Enter Username"
               value={username}
-              error="You need to enter a valid username"
+              error={usernameError}
               onChange={onChange}
             />
           </div>
@@ -65,7 +72,7 @@ function Register() {
               className="form-control"
               placeholder="Enter Password"
               value={password}
-              error="You need to enter a valid password"
+              error={passwordError}
               onChange={onChange}
             />
           </div>
@@ -78,7 +85,7 @@ function Register() {
                 labelClassName="form-check-label"
                 className="form-check-input"
                 value="User"
-                error="You need to enter a valid password"
+                error={roleError}
                 onChange={onChange}
               />
             </div>
@@ -89,7 +96,7 @@ function Register() {
                 labelClassName="form-check-label"
                 className="form-check-input"
                 value="Admin"
-                error="You need to enter a valid password"
+                error={roleError}
                 onChange={onChange}
               />
             </div>

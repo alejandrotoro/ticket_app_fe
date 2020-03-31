@@ -10,15 +10,6 @@ body, html, .App, #root, .auth-wrapper {
   height: 100%;
 }
 
-.input-error {
-  border: 'solid 1px red';
-}
-
-.input-error-label {
-  color: 'red';
-  font-size: '14px';
-}
-
 .navbar-brand {
   
 }

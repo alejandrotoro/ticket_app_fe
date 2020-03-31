@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Shared.css';
 
 const FormInput = (props) => {
   const {
