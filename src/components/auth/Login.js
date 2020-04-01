@@ -1,16 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FormInput from '../shared/formInput';
 import { Button } from '../shared/button';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+import { validateInputs } from '../../helpers/Helpers';
 
-  const onChange = () => {};
+const Login = () => {
+  const [user, setUser] = useState({
+    data: {
+      username: '',
+      password: ''
+    }
+  });
+
+  const [error, setError] = useState({
+    usernameError: '',
+    passwordError: ''
+  });
+
+  const { username, password } = user.data;
+  const { usernameError, passwordError } = error;
+
+  const onLoginUser = e => {
+    e.preventDefault();
+
+    const isValid = validateInputs(user.data, setError);
+
+    if(isValid) {
+      console.log(user);
+    }
+  };
+
+  const onChange = e => {
+    const { name, value } = e.target;
+    const { data } = user;
+    setUser({
+      data: {
+        ...data,
+        [name]: value
+      }
+    });
+  };
 
   return (
     <div className="auth-wrapper">
       <div className="auth-inner">
-        <form>
+        <form onSubmit={onLoginUser}>
           <h3>Sign In</h3>
           <div className="form-group">
             <FormInput
@@ -19,8 +54,8 @@ const Login = () => {
               label="Username"
               className="form-control"
               placeholder="Enter Username"
-              value=""
-              error="You need to enter a valid username"
+              value={username}
+              error={usernameError}
               onChange={onChange}
             />
           </div>
@@ -31,8 +66,8 @@ const Login = () => {
               label="Password"
               className="form-control"
               placeholder="Enter Password"
-              value=""
-              error="You need to enter a valid password"
+              value={password}
+              error={passwordError}
               onChange={onChange}
             />
           </div>
